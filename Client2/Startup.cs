@@ -15,7 +15,6 @@ namespace Client2
                 Authority = "http://localhost:44351",
                 ValidationMode = ValidationMode.ValidationEndpoint,
             });
-
             // configure web api
             var config = new HttpConfiguration();
             config.MapHttpAttributeRoutes();

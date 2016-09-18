@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Identityserver_secure_api",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client2", "Client2\Client2.csproj", "{DD7133F6-2FBD-4462-BA44-E88669B8689E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service", "Service\Service.csproj", "{91C6E1D3-EA13-496A-AF1B-077101F06BD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{DD7133F6-2FBD-4462-BA44-E88669B8689E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DD7133F6-2FBD-4462-BA44-E88669B8689E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DD7133F6-2FBD-4462-BA44-E88669B8689E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91C6E1D3-EA13-496A-AF1B-077101F06BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91C6E1D3-EA13-496A-AF1B-077101F06BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91C6E1D3-EA13-496A-AF1B-077101F06BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91C6E1D3-EA13-496A-AF1B-077101F06BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
