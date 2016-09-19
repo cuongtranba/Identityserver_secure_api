@@ -49,9 +49,17 @@ namespace ClientConsole
                 case 6:
                     ClearClient(client);
                     break;
+                case 7:
+                    ClearScope(scope);
+                    break;
                 default:
                     break;
             }
+        }
+
+        private static void ClearScope(LiteCollection<ScopeOAuth> scope)
+        {
+            scope.Delete(Query.All());
         }
 
         private static void ClearClient(LiteCollection<ClientOAuth> client)
@@ -61,33 +69,48 @@ namespace ClientConsole
 
         private static void AddScopeToClient(LiteCollection<ClientOAuth> client, LiteCollection<ScopeOAuth> scope)
         {
-            Console.WriteLine("-------scope---------");
-            GetAllScope(scope);
-            Console.WriteLine("-------client---------");
-            GetAllClient(client);
-            
-            Console.WriteLine("choose scope id");
-            var scopeId = int.Parse(Console.ReadLine());
-            Console.WriteLine("choose client id");
-            var clientId = int.Parse(Console.ReadLine());
+            Console.WriteLine("type 'create' to add scope to client and 'exit' to exit");
+            var input = Console.ReadLine();
+            do
+            {
+                Console.WriteLine("-------scope---------");
+                GetAllScope(scope);
+                Console.WriteLine("-------client---------");
+                GetAllClient(client);
+                Console.WriteLine("---------------------add scope to client------------");
+                Console.WriteLine("choose scope id");
+                var scopeId = int.Parse(Console.ReadLine());
+                Console.WriteLine("choose client id");
+                var clientId = int.Parse(Console.ReadLine());
+                var clientToScope = client.FindById(clientId);
+                var scopeToClient = scope.FindById(scopeId);
+                clientToScope.ScopeOAuths.Add(scopeToClient);
+                Console.WriteLine($"{clientToScope.ClientId}-{scopeToClient.Name}");
+                input = Console.ReadLine();
+            } while (input != "exit");
+            Console.WriteLine("-------------------------------------");
         }
 
         private static void GetAllScope(LiteCollection<ScopeOAuth> scope)
         {
+            Console.WriteLine("-------------------------scope------------------");
             var scopes = scope.FindAll().ToList();
             foreach (var scopeOAuth in scopes)
             {
-                Console.WriteLine($"{scopeOAuth.Id}-{scopeOAuth.Name}-{scopeOAuth.PublicOnly}");
+                Console.WriteLine($"ScopeId:{scopeOAuth.Id}-ScopeName{scopeOAuth.Name}-Public{scopeOAuth.PublicOnly}");
             }
+            Console.WriteLine("----------------------------end-----------------------------");
         }
 
         private static void GetAllClient(LiteCollection<ClientOAuth> client)
         {
+            Console.WriteLine("------------------------------client---------------");
             var clients = client.FindAll().ToList();
             foreach (var clientOAuth in clients)
             {
                 Console.WriteLine($"{clientOAuth.ClientId}-{clientOAuth.ClientSecret}");
             }
+            Console.WriteLine("-----------------------------end-------------------");
         }
 
         private static void CreateScope(LiteCollection<ScopeOAuth> scope)
@@ -109,6 +132,7 @@ namespace ClientConsole
                 }
                 input = Console.ReadLine();
             } while (input != "exit");
+            Console.WriteLine("-----------------------end-----------------------");
         }
 
         private static void CreateClient(LiteCollection<ClientOAuth> client)
@@ -123,6 +147,7 @@ namespace ClientConsole
                 GetAllClient(client);
                 input = Console.ReadLine();
             } while (input != "exit");
+            Console.WriteLine("-----------------------------end-----------------------------");
         }
 
         static void Menu()

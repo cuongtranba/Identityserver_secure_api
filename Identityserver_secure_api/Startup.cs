@@ -1,5 +1,7 @@
 ﻿using System;
+using System.IO;
 using System.Security.Cryptography.X509Certificates;
+using Identityserver_secure_api.Models;
 using Identityserver_secure_api.Service;
 using Identityserver_secure_api.Service.Implement;
 using Identityserver_secure_api.Service.Interface;
@@ -15,13 +17,18 @@ namespace Identityserver_secure_api
     {
         public void Configuration(IAppBuilder app)
         {
-            var factory = new IdentityServerServiceFactory();
-            factory.Register(new Registration<LiteDatabase>($"{ AppDomain.CurrentDomain.BaseDirectory }..\\LiteDb\\OAuthDB.db"));
+            var factory = new IdentityServerServiceFactory()
+                .UseInMemoryUsers(Users.Get());
+
+            factory.Register(new Registration<LiteDatabase>(resolver => new LiteDatabase($"{ AppDomain.CurrentDomain.BaseDirectory }..\\ClientConsole\\OAuthDB.db")));
+
+
             factory.Register(new Registration<IScopeService<Scope>, ScopeService>());
             factory.Register(new Registration<IClientService<Client>, ClientService>());
 
             factory.ClientStore = new Registration<IClientStore, ClientStore>();
             factory.ScopeStore = new Registration<IScopeStore, ScopeStore>();
+
             app.UseIdentityServer(new IdentityServerOptions
             {
                 SiteName = "Embedded IdentityServer",
