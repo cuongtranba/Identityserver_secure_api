@@ -86,6 +86,7 @@ namespace ClientConsole
                 var scopeToClient = scope.FindById(scopeId);
                 clientToScope.ScopeOAuths.Add(scopeToClient);
                 Console.WriteLine($"{clientToScope.ClientId}-{scopeToClient.Name}");
+                client.Update(clientToScope);
                 input = Console.ReadLine();
             } while (input != "exit");
             Console.WriteLine("-------------------------------------");

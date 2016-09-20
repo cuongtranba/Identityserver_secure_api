@@ -18,8 +18,8 @@ namespace Identityserver_secure_api
         public void Configuration(IAppBuilder app)
         {
             var factory = new IdentityServerServiceFactory()
-                .UseInMemoryUsers(Users.Get());
-
+                .UseInMemoryUsers(Users.Get())
+                .UseInMemoryClients(Clients.Get());
             factory.Register(new Registration<LiteDatabase>(resolver => new LiteDatabase($"{ AppDomain.CurrentDomain.BaseDirectory }..\\ClientConsole\\OAuthDB.db")));
 
 
