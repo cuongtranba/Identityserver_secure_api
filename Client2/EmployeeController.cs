@@ -3,13 +3,20 @@ using Thinktecture.IdentityModel.WebApi;
 
 namespace Client2
 {
-    [Route("Employee")]
+    [RoutePrefix("api/employee")]
     public class EmployeeController : ApiController
     {
-        [ResourceAuthorize("GetEmployee", "Employee")]
-        public IHttpActionResult Get()
+        [Route("Get.Employee")]
+        public IHttpActionResult GetEmployee()
         {
             return Ok("get employee ok");
+        }
+
+        [Route("Create.Employee")]
+        [HttpPost]
+        public IHttpActionResult CreateEmployee()
+        {
+            return Ok("create employee ok");
         }
     }
 }

@@ -20,6 +20,7 @@ namespace ClientConsole
                     Menu();
                     command = Convert.ToInt32(Console.ReadLine());
                     Execute(command, client, scope);
+                    command = int.Parse(Console.ReadLine());
                 } while (command != 0);
             }
         }
